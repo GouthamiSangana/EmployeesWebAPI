@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PersonalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="CityCode" />
+          </Key>
+          <Property Name="CityCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="100" />
+          <Property Name="StateCode" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="100" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="100" />
+          <Property Name="AddressLine2" Type="varchar" MaxLength="100" />
+          <Property Name="CityCode" Type="varchar" MaxLength="10" />
+          <Property Name="StateCode" Type="varchar" MaxLength="10" />
+          <Property Name="PinCode" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleCode" />
+          </Key>
+          <Property Name="RoleCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="100" />
+          <Property Name="RoleDescription" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="StateCode" />
+          </Key>
+          <Property Name="StateCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UserRoleMapping">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleCode" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleCode" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Function Name="getEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="PersonalModelStoreContainer">
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRoleMapping" EntityType="Self.UserRoleMapping" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PersonalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PersonalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cities" EntityType="PersonalModel.City" />
+          <EntitySet Name="States" EntityType="PersonalModel.State" />
+          <EntitySet Name="Employees" EntityType="PersonalModel.Employee" />
+          <EntitySet Name="Roles" EntityType="PersonalModel.Role" />
+          <EntitySet Name="Users" EntityType="PersonalModel.User" />
+          <EntitySet Name="UserRoleMappings" EntityType="PersonalModel.UserRoleMapping" />
+          <FunctionImport Name="getEmployees" ReturnType="Collection(String)" />
+        </EntityContainer>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityCode" />
+          </Key>
+          <Property Name="CityCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CityName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StateCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateCode" />
+          </Key>
+          <Property Name="StateCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StateName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CityCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StateCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PinCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleCode" />
+          </Key>
+          <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RoleDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserRoleMapping">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleCode" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PersonalModelStoreContainer" CdmEntityContainer="PersonalEntities">
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="PersonalModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="PersonalModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="PersonalModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="PersonalModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PersonalModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoleMappings">
+            <EntityTypeMapping TypeName="PersonalModel.UserRoleMapping">
+              <MappingFragment StoreEntitySet="UserRoleMapping">
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="getEmployees" FunctionName="PersonalModel.Store.getEmployees" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
